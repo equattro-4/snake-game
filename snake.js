@@ -1,9 +1,13 @@
 const board = document.getElementById('game-board');
 const scoreDisplay = document.getElementById('score');
+const prompt = document.getElementById('prompt');
 let score = 0;
 let snake = [{ x: 5, y: 5 }];
 let direction = { x: 0, y: 0 };
 let food = { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) };
+
+// Show initial prompt
+prompt.style.display = 'block';
 
 //start my game
 const startGame = () => {
@@ -13,6 +17,7 @@ const startGame = () => {
     snake = [{ x: 5, y: 5 }];
     placeFood();
     gameLoop();
+    prompt.style.display = 'none'; // Hide prompt when game starts
 };
 
 // put food in a random new spot
@@ -24,7 +29,10 @@ const placeFood = () => {
 // move  snake and check for game events
 const gameLoop = () => {
     if (checkCollision()) {
-        alert("Game Over!"); //  game over 
+        setTimeout(() => {
+            prompt.textContent = 'Game Over! Press Enter to Play Again';
+            prompt.style.display = 'block'; // Show prompt on game over
+        }, 200); // Slight delay to allow display update
         return;
     }
     
@@ -99,4 +107,3 @@ document.addEventListener('keydown', function(event) {
         startGame();
     }
 });
-
