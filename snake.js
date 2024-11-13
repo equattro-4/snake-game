@@ -93,5 +93,10 @@ document.addEventListener('keydown', e => {
     }
 });
 
-// start button +event listener
-document.getElementById('start').addEventListener('click', startGame);
+// changed to be enter key to start
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        startGame();
+    }
+});
+
